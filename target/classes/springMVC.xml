@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+       http://www.springframework.org/schema/beans/spring-beans.xsd 
+       http://www.springframework.org/schema/context 
+       http://www.springframework.org/schema/context/spring-context.xsd 
+       http://www.springframework.org/schema/mvc 
+       http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+       
+ 	<context:annotation-config/>
+	<context:component-scan base-package="com.hseea.wasteManagement.controller">
+<!-- 		<context:exclude-filter type="annotation" 
+		expression="org.springframework.stereotype.Controller"/> -->
+	</context:component-scan>
+ 	<mvc:default-servlet-handler/> 
+	
+	<mvc:annotation-driven>
+		<mvc:message-converters>
+			<bean class="org.springframework.http.converter.StringHttpMessageConverter">
+				<property name="supportedMediaTypes">
+					<list>
+						<value>application/json;charset=UTF-8</value>
+					</list>				
+				</property>
+			</bean>
+		</mvc:message-converters>
+	</mvc:annotation-driven>
+	
+<!-- 	//可要可不要，不要的话，控制器中要新建modelandview，并把URL绝对路径作为该构造函数的参数；要的话，控制器中只要返回一个字符串就行，前缀与后缀将在下面添加
+	<bean id="internalResourceViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/"/>
+		<property name="suffix" value=".jsp"/>
+	</bean> -->
+ 
+<!--  <bean id="simpleUrlHandlerMapping"
+      class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+       <property name="mappings">
+        <props>
+            /hello 路径的请求交给 id 为 helloController 的控制器处理
+            <prop key="/login">authController</prop>
+        </props>
+    </property>
+</bean>
+<bean id="authController" class="controller.AuthController"></bean>
+       -->
+ 
+ 	<bean id="internalResourceViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/jsp/"/>
+		<property name="suffix" value=".jsp"/>
+	</bean>
+	
+</beans>
